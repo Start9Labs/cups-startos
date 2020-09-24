@@ -19,7 +19,7 @@ image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/armv7-unknown-l
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm/v7 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
-	npm --prefix cups-messenger-ui run build
+	npm --prefix cups-messenger-ui run build-prod
 
 cups-messenger-ui/node_modules: cups-messenger-ui/package.json cups-messenger-ui/package-lock.json
 	npm --prefix cups-messenger-ui install
@@ -40,4 +40,5 @@ assets/httpd.conf: manifest.yaml assets/httpd.conf.template
 	tiny-tmpl manifest.yaml < assets/httpd.conf.template > assets/httpd.conf
 
 assets/www: cups-messenger-ui/www
+	test ! -f assets/www || rm -r assets/www
 	cp -r cups-messenger-ui/www assets/www
