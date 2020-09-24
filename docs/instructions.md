@@ -22,5 +22,5 @@ You can use Cups in the browser or through the mobile app.
 2. Log in using your Cups password, located in the "Config" section of your Embassy Cups service.
 
 ## Tips
-- Cups does not currently offer notifications, which are notoriously difficult to perform in a trustless. This means you will need to check your Cups app to see if you have new messages. There will be notification in the future.
-- Currently, Cups is a single-user service, meaning only you are meant to log in to your Cups service. This also means you can only message with people who are also running a Cups service. In the future, you will be able to create guest accounts, such that you can chat with anyone simple by giving them your Cups Tor address and an special invite code.
+- Cups does not currently offer notifications, which are notoriously difficult to perform in a trustless way. This means you will need to check your Cups app to see if you have new messages. There will be notifications in the future.
+- Currently, Cups is a single-user service, meaning only you are meant to log in to your Cups service. This also means you can only message with people who are also running a Cups service. In the future, you will be able to create guest accounts, such that you can chat with anyone simply by giving them your Cups Tor address and a special invite code.
