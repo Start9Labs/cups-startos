@@ -10,7 +10,7 @@ accesslog.filename = "/var/log/lighttpd/access.log"
 compress.cache-dir = "/tmp/lighttpd/cache"
 compress.filetype = ("text/plain","text/css", "text/xml", "image/svg+xml", "text/javascript", "application/wasm" )
 
-server.document-root = "/root/www" 
+server.document-root = "/var/www/cups" 
 
 server.port = 80
 
@@ -59,6 +59,6 @@ $HTTP["url"] =~ "^/api" {
 } else {
     setenv.add-response-header = (
         "X-Consulate-App-ID" => "cups",
-        "X-Consulate-App-Version" => "0.3.6"
+        "X-Consulate-App-Version" => "{{version}}"
     )
 }

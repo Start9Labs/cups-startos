@@ -19,11 +19,5 @@ mount: /root
 has-instructions: true
 os-version-required: ">=0.2.4"
 os-version-recommended: ">=0.2.4"
-assets:
-  - src: httpd.conf
-    dst: "."
-    overwrite: true
-  - src: www
-    dst: "."
-    overwrite: true
+assets: []
 hidden-service-version: v3
