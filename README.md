@@ -1,10 +1,10 @@
 # Wrapper for Cups Messenger
 
-This project wraps the [Cups Messenger](https://github.com/Start9Labs/cups-messenger) project for EmbassyOS. Cups is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else.
+This project wraps [Cups Messenger](https://github.com/Start9Labs/cups-messenger) for EmbassyOS. Cups is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else.
 
 ## Dependencies
 
-The following system level dependencies need to be installed in order to build this project. Follow each guide to get set up:
+Install the following system dependencies to build this project by following the instructions on the provided links:
 
 - [docker](https://docs.docker.com/get-docker)
 - [docker-buildx](https://docs.docker.com/buildx/working-with-buildx/)
