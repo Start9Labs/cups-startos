@@ -1,30 +1,31 @@
-ASSETS := $(shell yq r manifest.yaml assets.*.src)
-ASSET_PATHS := $(addprefix assets/,$(ASSETS))
-VERSION := $(shell yq r manifest.yaml version)
+VERSION := $(shell yq e '.version' manifest.yaml)
 BACKEND_SRC := $(shell find ./cups-messenger -name '*.rs') cups-messenger/Cargo.toml cups-messenger/Cargo.lock
 FRONTEND_SRC := $(shell find cups-messenger-ui/ -type d \( -path cups-messenger-ui/www -o -path cups-messenger-ui/node_modules \) -prune -o -name '*' -print)
+S9PK_PATH=$(shell find . -name cups.s9pk -print)
 
 .DELETE_ON_ERROR:
 
-all: cups.s9pk
+all: verify
 
 clean:
 	test ! -f cups.s9pk || rm cups.s9pk
 	test ! -f image.tar || rm image.tar
 	test ! -f cups-messenger-ui/www || rm -r cups-messenger-ui/www
 	test ! -f cups-messenger-ui/node_modules || rm -r cups-messenger-ui/node_modules
-	test ! -f cups-messenger/target/armv7-unknown-linux-musleabihf/release/cups || rm cups-messenger/target/armv7-unknown-linux-musleabihf/release/cups
+	test ! -f cups-messenger/target/aarch64-unknown-linux-musl/release/cups || rm cups-messenger/target/aarch64-unknown-linux-musl/release/cups
 	test ! -f httpd.conf || rm httpd.conf
 
 install: cups.s9pk
 	appmgr install cups.s9pk
 
-cups.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar instructions.md $(ASSET_PATHS)
-	appmgr -vv pack $(shell pwd) -o cups.s9pk
-	appmgr -vv verify cups.s9pk
+cups.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar instructions.md 
+	embassy-sdk pack
 
-image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/armv7-unknown-linux-musleabihf/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm/v7 -o type=docker,dest=image.tar .
+verify: cups.s9pk $(S9PK_PATH)
+	embassy-sdk verify $(S9PK_PATH)
+
+image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm/v8 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
 	npm --prefix cups-messenger-ui run build-prod
@@ -32,9 +33,9 @@ cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
 cups-messenger-ui/node_modules: cups-messenger-ui/package.json cups-messenger-ui/package-lock.json
 	npm --prefix cups-messenger-ui install
 
-cups-messenger/target/armv7-unknown-linux-musleabihf/release/cups: $(BACKEND_SRC)
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:armv7-musleabihf cargo +beta build --release
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:armv7-musleabihf musl-strip target/armv7-unknown-linux-musleabihf/release/cups
+cups-messenger/target/aarch64-unknown-linux-musl/release/cups: $(BACKEND_SRC)
+	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:aarch64-musl cargo +beta build --release
+	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:aarch64-musl musl-strip target/aarch64-unknown-linux-musl/release/cups
 
 cups-messenger/Cargo.toml: manifest.yaml
 	toml set cups-messenger/Cargo.toml package.version $(VERSION) > cups-messenger/Cargo.toml.tmp

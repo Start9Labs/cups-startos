@@ -1,23 +1,74 @@
-compat: v0
 id: cups
-version: "0.3.6"
 title: "Cups Messenger"
+version: 0.3.7
+release-notes: "Upgrade to EmbassyOS v0.3.0"
+license: apache
+wrapper-repo: "https://github.com/Start9Labs/filebrowser-wrapper"
+upstream-repo: "https://github.com/filebrowser/filebrowser"
+build: ["make"]
+min-os-version: "0.3.0"
 description:
-  short: "Real private messaging"
-  long: "Cups is a private, self-hosted, peer-to-peer, Tor-based, instant messenger. Unlike other end-to-end encrypted messengers, with Cups on the Embassy there are no trusted third parties."
-release-notes: |
-  Features
-    - Adds instructions defined by EmbassyOS 0.2.4 instructions feature
-ports:
-  - internal: 59001
-    tor: 59001
-  - internal: 80
-    tor: 80
-image:
-  type: tar
-mount: /root
-has-instructions: true
-os-version-required: ">=0.2.4"
-os-version-recommended: ">=0.2.4"
-assets: []
-hidden-service-version: v3
+  short: Real private messaging
+  long: |
+    Cups is a private, self-hosted, peer-to-peer, Tor-based, instant messenger. Unlike other end-to-end encrypted messengers, with Cups on the Embassy there are no trusted third parties.
+assets:
+  license: LICENSE
+  icon: icon.png
+  instructions: instructions.md
+  docker-images: image.tar
+main:
+  type: docker
+  image: main
+  entrypoint: "/usr/local/bin/docker_entrypoint.sh"
+  args: []
+  mounts: {}
+  io-format: yaml
+health-checks: {}
+config:
+  get:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: main
+    args: 
+      - "get"
+      - "/root"
+    mounts: {}
+    io-format: yaml
+  set:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: main
+    args:
+      - "set"
+      - "/root"
+    mounts: {}
+    io-format: yaml
+dependencies: {}
+volumes: {}
+interfaces:
+  main:
+    tor-config:
+      port-mapping:
+        - 80: "80"
+        - 59001: "59001"
+    ui: true
+    protocols:
+      - tcp
+      - http
+backup:
+  create:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: "true"
+    args: []
+    mounts: {}
+  restore:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: "true"
+    args: []
+    mounts: {}
