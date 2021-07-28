@@ -16,6 +16,7 @@ assets:
   icon: icon.png
   instructions: instructions.md
   docker-images: image.tar
+  icon-type: png
 main:
   type: docker
   image: main
@@ -51,8 +52,8 @@ interfaces:
   main:
     tor-config:
       port-mapping:
-        - 80: "80"
-        - 59001: "59001"
+        80: "80"
+        59001: "59001"
     ui: true
     protocols:
       - tcp
