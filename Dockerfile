@@ -7,8 +7,8 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing cata
 
 ADD ./cups-messenger/target/aarch64-unknown-linux-musl/release/cups /usr/local/bin/cups
 RUN chmod a+x /usr/local/bin/cups
-ADD ./main.sh /usr/local/bin/main
-RUN chmod a+x /usr/local/bin/main
+ADD ./config.sh /usr/local/bin/config
+RUN chmod a+x /usr/local/bin/config
 ADD ./httpd.conf /etc/lighttpd/httpd.conf
 ADD ./cups-messenger-ui/www /var/www/cups
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
