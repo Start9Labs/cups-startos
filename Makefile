@@ -2,6 +2,7 @@ VERSION := $(shell yq e '.version' manifest.yaml)
 BACKEND_SRC := $(shell find ./cups-messenger -name '*.rs') cups-messenger/Cargo.toml cups-messenger/Cargo.lock
 FRONTEND_SRC := $(shell find cups-messenger-ui/ -type d \( -path cups-messenger-ui/www -o -path cups-messenger-ui/node_modules \) -prune -o -name '*' -print)
 S9PK_PATH=$(shell find . -name cups.s9pk -print)
+PWD=$(shell pwd)
 
 .DELETE_ON_ERROR:
 
@@ -24,7 +25,7 @@ cups.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar instructio
 verify: cups.s9pk $(S9PK_PATH)
 	embassy-sdk verify $(S9PK_PATH)
 
-image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
+image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www config.sh
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm/v8 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
