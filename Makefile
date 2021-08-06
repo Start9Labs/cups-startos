@@ -26,7 +26,7 @@ verify: cups.s9pk $(S9PK_PATH)
 	embassy-sdk verify $(S9PK_PATH)
 
 image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www config.sh
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm/v8 -o type=docker,dest=image.tar .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm64 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
 	npm --prefix cups-messenger-ui run build-prod
