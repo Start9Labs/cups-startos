@@ -8,4 +8,4 @@ password:
     charset: "a-k,m-z,2-9"
     len: 20
   pattern: '^[^\n"]*$'
-  patternDescription: "Must not contain newline or quote characters."
+  pattern-description: "Must not contain newline or quote characters."
