@@ -62,6 +62,9 @@ interfaces:
       80:
         ssl: false
         mapping: 80
+      59001:
+        ssl: false
+        mapping: 59001
     ui: true
     protocols:
       - tcp
