@@ -16,16 +16,13 @@ clean:
 	test ! -f cups-messenger/target/aarch64-unknown-linux-musl/release/cups || rm cups-messenger/target/aarch64-unknown-linux-musl/release/cups
 	test ! -f httpd.conf || rm httpd.conf
 
-install: cups.s9pk
-	appmgr install cups.s9pk
-
 cups.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar instructions.md 
 	embassy-sdk pack
 
 verify: cups.s9pk $(S9PK_PATH)
 	embassy-sdk verify $(S9PK_PATH)
 
-image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www config.sh
+image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups --platform=linux/arm64 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules

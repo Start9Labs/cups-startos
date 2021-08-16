@@ -3,8 +3,10 @@ title: "Cups Messenger"
 version: 0.3.7
 release-notes: "Upgrade to EmbassyOS v0.3.0"
 license: apache
-wrapper-repo: "https://github.com/Start9Labs/filebrowser-wrapper"
-upstream-repo: "https://github.com/filebrowser/filebrowser"
+wrapper-repo: "https://github.com/Start9Labs/cups-wrapper"
+upstream-repo: "https://github.com/Start9Labs/cups-messenger"
+support-site: "https://matrix.to/#/!lMnRwPWnyQvOfAoEnD:matrix.start9labs.com"
+marketing-site: "https://start9.com"
 build: ["make"]
 min-os-version: "0.3.0"
 description:
@@ -50,10 +52,16 @@ dependencies: {}
 volumes: {}
 interfaces:
   main:
+    name: Main
+    description: Main image interface configurations
     tor-config:
       port-mapping:
         80: "80"
         59001: "59001"
+    lan-config:
+      80:
+        ssl: false
+        mapping: 80
     ui: true
     protocols:
       - tcp
