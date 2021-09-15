@@ -43,5 +43,5 @@ SSH into an Embassy device.
 Run the following command to determine successful install:
 
 ```
-appmgr install cups.s9pk
+embassy-cli package install cups.s9pk
 ```
