@@ -27,7 +27,7 @@ main:
     main: /root
   io-format: yaml
 health-checks:
-  main: 
+  main:
     type: docker
     image: main
     system: false
@@ -43,7 +43,7 @@ config:
     image: compat
     system: true
     entrypoint: compat
-    args: 
+    args:
       - config
       - get
       - /root
@@ -66,6 +66,7 @@ config:
     mounts:
       compat: /mnt/assets
       main: /root
+    io-format: yaml
 properties:
   type: docker
   image: compat

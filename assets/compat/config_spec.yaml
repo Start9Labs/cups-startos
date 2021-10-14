@@ -9,3 +9,11 @@ password:
     len: 20
   pattern: '^[^\n"]*$'
   pattern-description: "Must not contain newline or quote characters."
+address-private-key:
+  name: Tor Private Key
+  description: Private key from which your cups address was derived
+  type: pointer
+  subtype: package
+  package-id: cups
+  target: tor-key
+  interface: network
