@@ -2,7 +2,7 @@ FROM alpine:latest
 
 EXPOSE 59001 80
 
-RUN apk add lighttpd
+RUN apk add lighttpd curl
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing catatonit
 
 ADD ./cups-messenger/target/aarch64-unknown-linux-musl/release/cups /usr/local/bin/cups

@@ -27,16 +27,14 @@ main:
     main: /root
   io-format: yaml
 health-checks:
-  main:
+  interface:
     type: docker
     image: main
-    system: false
     entrypoint: sh
-    args: ["-c", "echo 'TODO' || exit 1"]
-    mounts:
-      main: /root
+    args: ["-c", "curl cups.embassy:80 || exit 1"]
     io-format: yaml
     critical: false
+    inject: true
 config:
   get:
     type: docker
@@ -95,8 +93,8 @@ interfaces:
         59001: "59001"
     lan-config:
       80:
-        ssl: false
-        mapping: 80
+        ssl: true
+        mapping: 443
       59001:
         ssl: false
         mapping: 59001
@@ -113,12 +111,12 @@ backup:
     args:
       - duplicity
       - create
-      - cups
       - /mnt/backup
-      - /root
+      - /root/data
     mounts:
       BACKUP: /mnt/backup
-      main: /root
+      main: /root/data
+    io-format: yaml
   restore:
     type: docker
     image: compat
@@ -127,9 +125,9 @@ backup:
     args:
       - duplicity
       - restore
-      - cups
       - /mnt/backup
-      - /root
+      - /root/data
     mounts:
       BACKUP: /mnt/backup
-      main: /root
+      main: /root/data
+    io-format: yaml
