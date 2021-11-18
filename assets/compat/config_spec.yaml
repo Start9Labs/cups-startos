@@ -9,6 +9,8 @@ password:
     len: 20
   pattern: '^[^\n"]*$'
   pattern-description: "Must not contain newline or quote characters."
+  masked: true
+  copyable: true
 address-private-key:
   name: Tor Private Key
   description: Private key from which your cups address was derived
