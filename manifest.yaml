@@ -27,7 +27,7 @@ main:
     main: /root
   io-format: yaml
 health-checks:
-  interface:
+  web-ui:
     name: Web Interface
     description: Activates once your Cups Web UI is ready to visit in the browser
     type: docker
