@@ -28,12 +28,14 @@ main:
   io-format: yaml
 health-checks:
   interface:
+    name: Web Interface
+    description: Activates once your Cups Web UI is ready to visit in the browser
     type: docker
     image: main
     entrypoint: sh
     args: ["-c", "curl cups.embassy:80 || exit 1"]
     io-format: yaml
-    critical: false
+    severity: warning
     inject: true
 config:
   get:
