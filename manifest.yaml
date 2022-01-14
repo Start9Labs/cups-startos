@@ -85,9 +85,9 @@ volumes:
   compat:
     type: assets
 interfaces:
-  network:
-    name: Network Interface
-    description: Specifies the interfaces to listen on for HTTP connections.
+  main:
+    name: Web Interface
+    description: Main user interface for interacting with Cups Messenger in a web browser.
     tor-config:
       port-mapping:
         80: "80"
