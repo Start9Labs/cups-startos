@@ -18,4 +18,4 @@ address-private-key:
   subtype: package
   package-id: cups
   target: tor-key
-  interface: network
+  interface: main
