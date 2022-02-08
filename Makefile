@@ -26,7 +26,7 @@ verify: cups.s9pk $(S9PK_PATH)
 install: cups.s9pk 
 	embassy-cli package install cups.s9pk
 
-image.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
+image.tar: Dockerfile docker_entrypoint.sh check-web.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/cups/main:${EMVER} --platform=linux/arm64/v8 -o type=docker,dest=image.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
