@@ -93,12 +93,12 @@ interfaces:
         80: "80"
         59001: "59001"
     lan-config:
-      80:
-        ssl: true
-        mapping: 443
       59001:
         ssl: false
-        mapping: 59001
+        internal: 59001
+      443:
+        ssl: true
+        internal: 80
     ui: true
     protocols:
       - tcp
