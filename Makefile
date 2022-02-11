@@ -37,7 +37,6 @@ cups-messenger-ui/node_modules: cups-messenger-ui/package.json cups-messenger-ui
 
 cups-messenger/target/aarch64-unknown-linux-musl/release/cups: $(BACKEND_SRC)
 	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:aarch64-musl cargo +beta build --release
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/cups-messenger:/home/rust/src start9/rust-musl-cross:aarch64-musl musl-strip target/aarch64-unknown-linux-musl/release/cups
 
 cups-messenger/Cargo.toml: manifest.yaml
 	toml set cups-messenger/Cargo.toml package.version $(EMVER) > cups-messenger/Cargo.toml.tmp
