@@ -21,7 +21,7 @@ cups.s9pk: manifest.yaml image.tar instructions.md LICENSE icon.png ${ASSET_PATH
 	embassy-sdk pack
 
 verify: cups.s9pk $(S9PK_PATH)
-	embassy-sdk verify $(S9PK_PATH)
+	embassy-sdk verify s9pk $(S9PK_PATH)
 
 install: cups.s9pk 
 	embassy-cli package install cups.s9pk
