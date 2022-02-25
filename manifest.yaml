@@ -29,7 +29,7 @@ main:
 health-checks:
   web-ui:
     name: Web Interface
-    description: Activates once your Cups Web UI is ready to visit in the browser
+    success-message: Cups Web UI is available to visit in the browser
     type: docker
     image: main
     entrypoint: check-web.sh
