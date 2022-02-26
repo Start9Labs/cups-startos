@@ -15,7 +15,7 @@ Install the following system dependencies to build this project by following the
 - [toml-cli](https://github.com/gnprice/toml-cli)
 - [rust](https://rustup.rs)
 - [npm](https://www.npmjs.com/get-npm)
-- [appmgr](https://github.com/Start9Labs/embassy-os/tree/master/appmgr)
+- [embassy-sdk](https://github.com/Start9Labs/embassy-os/blob/master/backend/install-sdk.sh)
 - [make](https://www.gnu.org/software/make/)
 
 ## Cloning
