@@ -1,10 +1,10 @@
 # Wrapper for Cups Messenger
 
-This project wraps [Cups Messenger](https://github.com/Start9Labs/cups-messenger) for EmbassyOS. Cups is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else.
+[Cups Messenger](https://github.com/Start9Labs/cups-messenger) is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else. This repository creates the `s9pk` package that is installed to run `cups` on [embassyOS](https://github.com/Start9Labs/embassy-os/).
 
 ## Dependencies
 
-Install the following system dependencies to build this project by following the instructions on the provided links:
+Install the following system dependencies to build this project by following the instructions in the provided links. You can also find detailed steps to setup your environment in the service packaging [documentation](https://github.com/Start9Labs/service-pipeline#development-environment).
 
 - [docker](https://docs.docker.com/get-docker)
 - [docker-buildx](https://docs.docker.com/buildx/working-with-buildx/)
@@ -17,6 +17,7 @@ Install the following system dependencies to build this project by following the
 - [npm](https://www.npmjs.com/get-npm)
 - [embassy-sdk](https://github.com/Start9Labs/embassy-os/blob/master/backend/install-sdk.sh)
 - [make](https://www.gnu.org/software/make/)
+- [deno](https://deno.land/#installation)
 
 ## Cloning
 
@@ -30,18 +31,36 @@ git submodule update --init
 
 ## Building
 
-To build the project, run the following commands:
+To build the `cups` package, run the following command:
 
 ```
 make
 ```
 
-## Installing (on Embassy)
+## Installing (on embassyOS)
 
-SSH into an Embassy device.
-`scp` the `.s9pk` to any directory from your local machine.
-Run the following command to determine successful install:
+Run the following commands to install:
+
+> :information_source: Change embassy-server-name.local to your Embassy address
 
 ```
-embassy-cli package install cups.s9pk
+embassy-cli auth login
+# Enter your embassy password
+embassy-cli --host https://embassy-server-name.local package install cups.s9pk
 ```
+
+If you already have your `embassy-cli` config file setup with a default `host`,
+you can install simply by running:
+
+```
+make install
+```
+
+> **Tip:** You can also install the cups.s9pk using **Sideload Service** under
+the **Embassy > Settings** section.
+
+### Verify Install
+
+Go to your Embassy Services page, select **Cups Messenger**, configure and start the service. Then, verify its interfaces are accessible.
+
+**Done!** 

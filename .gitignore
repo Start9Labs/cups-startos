@@ -1,3 +1,6 @@
 image.tar
 cups.s9pk
 assets/www
+.vscode
+docker-images
+scripts/*.js
