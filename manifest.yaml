@@ -1,7 +1,9 @@
 id: cups
 title: "Cups Messenger"
 version: 0.3.8
-release-notes: "Update to run on x86_64 architecture"
+release-notes: | 
+ * Update to run on x86_64 architecture
+ * Switch to using new eOS APIs for faster configuration and properties
 license: apache
 wrapper-repo: "https://github.com/Start9Labs/cups-wrapper"
 upstream-repo: "https://github.com/Start9Labs/cups-messenger"
