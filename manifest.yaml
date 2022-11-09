@@ -1,7 +1,9 @@
 id: cups
 title: "Cups Messenger"
-version: 0.3.7
-release-notes: "Upgrade to EmbassyOS v0.3.0"
+version: 0.3.8
+release-notes: | 
+ * Update to run on x86_64 architecture
+ * Switch to using new eOS APIs for faster configuration and properties
 license: apache
 wrapper-repo: "https://github.com/Start9Labs/cups-wrapper"
 upstream-repo: "https://github.com/Start9Labs/cups-messenger"
@@ -28,61 +30,19 @@ main:
 health-checks:
   web-ui:
     name: Web Interface
-    success-message: Cups Web UI is available to visit in the browser
-    type: docker
-    image: main
-    entrypoint: check-web.sh
-    args: []
-    io-format: json
-    inject: true
+    success-message: Ready to visit in a web browser
+    type: script
 config:
   get:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - config
-      - get
-      - /root
-      - "/mnt/assets/config_spec.yaml"
-    mounts:
-      compat: /mnt/assets
-      main: /root
-    io-format: yaml
+    type: script
   set:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - config
-      - set
-      - cups
-      - /root
-      - "/mnt/assets/config_rules.yaml"
-    mounts:
-      compat: /mnt/assets
-      main: /root
-    io-format: yaml
+    type: script
 properties:
-  type: docker
-  image: compat
-  system: true
-  entrypoint: compat
-  args:
-    - properties
-    - /root
-  mounts:
-    main: /root
-    compat: /mnt/assets
-  io-format: yaml
+  type: script
 dependencies: {}
 volumes:
   main:
     type: data
-  compat:
-    type: assets
 interfaces:
   main:
     name: Web Interface
@@ -131,3 +91,12 @@ backup:
       BACKUP: /mnt/backup
       main: /root/data
     io-format: yaml
+migrations:
+  from:
+    "*":
+      type: script
+      args: ["from"]
+  to:
+    "*":
+      type: script
+      args: ["to"]
