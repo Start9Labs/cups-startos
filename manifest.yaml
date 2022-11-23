@@ -3,7 +3,7 @@ title: "Cups Messenger"
 version: 0.3.8
 release-notes: | 
  * Update to run on x86_64 architecture
- * Switch to using new eOS APIs for faster configuration and properties
+ * Utilize new eOS APIs
 license: apache
 wrapper-repo: "https://github.com/Start9Labs/cups-wrapper"
 upstream-repo: "https://github.com/Start9Labs/cups-messenger"
@@ -19,13 +19,12 @@ assets:
   icon: icon.png
   instructions: instructions.md
 main:
-  type: docker
-  image: main
-  entrypoint: docker_entrypoint.sh
-  args: []
-  mounts:
-    main: /root
-  io-format: yaml
+  type: script
+containers:
+  main:
+    image: main
+    mounts:
+      main: /root
 health-checks:
   web-ui:
     name: Web Interface
