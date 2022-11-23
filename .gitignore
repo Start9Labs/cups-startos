@@ -4,3 +4,4 @@ assets/www
 .vscode
 docker-images
 scripts/*.js
+.DS_Store
