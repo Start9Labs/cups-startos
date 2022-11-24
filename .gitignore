@@ -5,3 +5,4 @@ assets/www
 docker-images
 scripts/*.js
 .DS_Store
+httpd.conf
