@@ -1,6 +1,6 @@
 id: cups
 title: "Cups Messenger"
-version: 0.3.8
+version: 0.3.9
 release-notes: | 
  * Update to run on x86_64 architecture
  * Switch to using new eOS APIs for faster configuration and properties

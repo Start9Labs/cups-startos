@@ -31,11 +31,11 @@ $(PKG_ID).s9pk: manifest.yaml instructions.md LICENSE icon.png scripts/embassy.j
 
 docker-images/aarch64.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/aarch64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/arm64/v8 -o type=docker,dest=docker-images/aarch64.tar .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --build-arg ARCH=aarch64 --build-arg PLATFORM=arm64 --platform=linux/arm64/v8 -o type=docker,dest=docker-images/aarch64.tar .
 
 docker-images/x86_64.tar: Dockerfile docker_entrypoint.sh cups-messenger/target/x86_64-unknown-linux-musl/release/cups manifest.yaml httpd.conf cups-messenger-ui/www
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/amd64 -o type=docker,dest=docker-images/x86_64.tar .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --build-arg ARCH=x86_64 --build-arg PLATFORM=amd64 --platform=linux/amd64 -o type=docker,dest=docker-images/x86_64.tar .
 
 cups-messenger-ui/www: $(FRONTEND_SRC) cups-messenger-ui/node_modules
 	npm --prefix cups-messenger-ui run build-prod
