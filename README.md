@@ -1,6 +1,8 @@
 # Wrapper for Cups Messenger
 
-[Cups Messenger](https://github.com/Start9Labs/cups-messenger) is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else. This repository creates the `s9pk` package that is installed to run `cups` on [embassyOS](https://github.com/Start9Labs/embassy-os/).
+[Cups Messenger](https://github.com/Start9Labs/cups-messenger) is a peer-to-peer, encrypted instant messaging service with no central servers or trusted third parties. Messages are relayed by and saved on the two communicating servers and nowhere else. This repository creates the `s9pk` package that is installed to run `cups` on [StartOS](https://github.com/Start9Labs/start-os/).
+
+This project is no longer maintained by Start9 and is open to community contributions or takeover. 
 
 ## Dependencies
 
